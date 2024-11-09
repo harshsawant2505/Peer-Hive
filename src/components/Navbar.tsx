@@ -3,20 +3,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
 
-function Navbar() {
-    const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-xl min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
+function Navbar({type}:any) {
+    console.log(type)
+    const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-lg min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
   return (
-    <div>
+    <div className={`${type == 'fixed'&&'absolute'} w-full`}>
 
-    <div className='hidden md:flex justify-between px-6 py-2 '>
+    <div className={`hidden md:flex justify-between px-6 py-2 `}>
         <div className='flex justify-evenly gap-10 items-center '>
             <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true}></Image>
             <input 
                 type="text" 
-                placeholder="search..." 
+                placeholder="Search..." 
                 alt='search' 
                 aria-label='search'
-                className='bg-gray-600 text-white placeholder-white px-2 py-1 rounded-xl w-[15vw]'
+                className='bg-gray-600 text-white placeholder-white px-2 py-2 rounded-lg w-[15vw] border-none outline-none'
                 />
             <Link href={'/'} className={btclass}>Clubs</Link>
             <Link href={'/'} className={btclass}>Councils</Link>
