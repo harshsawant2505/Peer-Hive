@@ -30,7 +30,8 @@ function Page({ params, searchParams }: any) {
   // const members = searchParams.members || '';
   const college = unwrappedSearch.college;
   const members = unwrappedSearch.members;
-  console.log(organiser, college, members);
+  const owner = unwrappedSearch.owner;
+  console.log(organiser, college, members, owner);
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -129,7 +130,7 @@ function Page({ params, searchParams }: any) {
       </div>
     </div>
   );
-
+  // if(user.email===)
   return (
     <div className="min-h-screen bg-gradient-to-tr from-black   to-blue-950">
       <Navbar type="" />

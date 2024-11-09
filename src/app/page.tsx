@@ -75,6 +75,7 @@ useEffect(()=>{
               members={100}
               type={card.type}
               des = {card.des}
+              owner = {card.owner}
             />
           ))}
         </div>
@@ -89,9 +90,11 @@ useEffect(()=>{
               <Card
                 Name={card.Name}
                 Organiser={card.Organiser}
-                College={card.College}
+                College={}
                 members={card.members}
                 type={card.type}
+                des = {card.des}
+                owner = {card.owner}
               />
             </div>
           ))}

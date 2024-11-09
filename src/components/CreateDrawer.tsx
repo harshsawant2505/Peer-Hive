@@ -21,52 +21,55 @@ import {
 } from "@/components/ui/select";
 import { OrigamiIcon, Plus } from "lucide-react";
 import axios from 'axios';
-import toast,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 const CreatePostDrawer = () => {
   const [formData, setFormData] = useState({
     type: '',
     name: '',
     description: '',
-    organization: ''
+    organization: '',
+    owner: ''
   });
 
   const [loading, setloading] = useState(false)
 
-  const handleSubmit = async(e:any) => {
-
+  const {data: token, status} = useSession()
+  console.log(token, status)
+  const handleSubmit = async (e: any) => {
     try {
-        
-  
-    setloading(true)
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    const res = await axios.post('/api/addEntry', formData);
 
-    if(res.data.success){
-      console.log('Entry added successfully');
-      setloading(false)
-      alert(res.data.message)
-    } else {
+      setFormData({ ...formData, owner: token?.user?.email })
+      setloading(true)
+      e.preventDefault();
+      console.log('Form submitted:', formData);
+      const res = await axios.post('/api/addEntry', formData);
+
+      if (res.data.success) {
+        console.log('Entry added successfully');
+        setloading(false)
+        alert(res.data.message)
+      } else {
         alert(res.data.message)
         setloading(false)
-      console.log('Error adding entry');
-    }
+        console.log('Error adding entry');
+      }
 
-} catch (error) {
-       alert("Error adding entry")
-       setloading(false)
-    console.log(error); 
-}
+    } catch (error) {
+      alert("Error adding entry")
+      setloading(false)
+      console.log(error);
+    }
   };
 
   return (
     <Drawer>
-        
+
       <DrawerTrigger asChild>
         <Button className="bg-blue-600 hover:bg-blue-700 font-bold">
           <Plus className="mr-2 h-4 w-4 " />
-         <span className='font-extrabold'> Create New</span>
+          <span className='font-extrabold'> Create New</span>
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-slate-900 border-t border-slate-800">
@@ -74,7 +77,7 @@ const CreatePostDrawer = () => {
           <DrawerHeader>
             <DrawerTitle className="text-2xl font-bold text-white">Create New Extry</DrawerTitle>
           </DrawerHeader>
-          
+
           <div className="p-4 pb-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Post Type Selection */}
@@ -82,8 +85,8 @@ const CreatePostDrawer = () => {
                 <label className="text-sm font-medium text-slate-200">
                   Entry Type
                 </label>
-                <Select 
-                  onValueChange={(value) => setFormData({...formData, type: value})}
+                <Select
+                  onValueChange={(value) => setFormData({ ...formData, type: value })}
                 >
                   <SelectTrigger className="w-full bg-slate-800 border-slate-700 text-slate-200 focus:ring-blue-600">
                     <SelectValue placeholder="Select type" />
@@ -107,7 +110,7 @@ const CreatePostDrawer = () => {
                   placeholder="Enter name"
                   className="bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 focus-visible:ring-blue-600"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
@@ -119,7 +122,7 @@ const CreatePostDrawer = () => {
                   placeholder="Enter Org name"
                   className="bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 focus-visible:ring-blue-600"
                   value={formData.organization}
-                  onChange={(e) => setFormData({...formData, organization: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                 />
               </div>
 
@@ -132,7 +135,7 @@ const CreatePostDrawer = () => {
                   placeholder="Enter a short description"
                   className="min-h-[120px] bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 focus-visible:ring-blue-600"
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 />
               </div>
             </form>
@@ -140,11 +143,11 @@ const CreatePostDrawer = () => {
 
           <DrawerFooter className="border-t border-slate-800 bg-slate-900/50">
             <div className="flex gap-3 ">
-              <Button 
+              <Button
                 onClick={handleSubmit}
                 className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
               >
-                {!loading?"Create Entry": "Creating Entry..."}
+                {!loading ? "Create Entry" : "Creating Entry..."}
               </Button>
               <DrawerClose asChild>
                 <Button variant="outline" className="flex-1 border-slate-700 text-black hover:bg-slate-800 hover:text-white">

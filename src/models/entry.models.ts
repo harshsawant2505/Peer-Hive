@@ -2,6 +2,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+
+
 const entrySchema = new Schema(
   {
     name: {
@@ -20,6 +22,9 @@ const entrySchema = new Schema(
       type: String,
       
     },
+    owner:{
+      type: String,
+    }
   },
 
 );

@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
         type: formData.type,
         college: college,
         organization: formData.organization,
+        owner: session.user.email
     });
 
     const savedEntry = await newEntry.save();

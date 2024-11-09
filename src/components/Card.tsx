@@ -10,14 +10,16 @@ function Card({
   College,
   members,
   type,
-  des
+  des,
+  owner
 }: {
   Name: string,
   Organiser: string,
   College: string,
   members: number,
   type: string,
-  des: string
+  des: string,
+  owner: string
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [randomImage, setRandomImage] = useState('/c1.png'); // Default image
@@ -70,7 +72,7 @@ function Card({
                   {Name}
                 </h2>
                 <Link 
-                  href={`/dashboard/${Organiser}?college=${College}&members=${members}`}
+                  href={`/dashboard/${Organiser}?college=${College}&members=${members}&owner=${owner}`}
                   className='text-white hover:text-[#f76df7] transition-colors font-medium'
                 >
                   {Organiser}
@@ -88,7 +90,7 @@ function Card({
 
           <div className='flex justify-between items-center pt-2'>
             <Link 
-              href={`/dashboard/${Organiser}?college=${College}&members=${members}`}
+              href={`/dashboard/${Organiser}?college=${College}&members=${members}&owner=${owner}`}
               className='px-4 py-2 bg-[#EC41F2]/20 hover:bg-[#EC41F2]/30 border border-[#EC41F2]/30 rounded-xl transition-colors duration-300 text-sm font-medium'
             >
               Dashboard
