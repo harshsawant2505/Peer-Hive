@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaCalendarDays, FaUsers, FaChevronDown } from 'react-icons/fa6'
@@ -18,6 +18,17 @@ function Card({
   type: string
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [randomImage, setRandomImage] = useState('/c1.png'); // Default image
+
+  // Array of image paths
+  const imagePaths = ['/c1.jpeg', '/c2.jpeg', '/c3.jpeg', '/c4.jpeg', '/c5.jpeg', '/c6.jpeg', '/c7.jpeg'];
+  
+  // Set random image on client side
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * imagePaths.length);
+    setRandomImage(imagePaths[randomIndex]);
+  }, []);
+
   const desc: string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur corporis velit necessitatibus, repellat laudantium Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur officia eveniet ut minus nostrum quo accusamus. Placeat voluptates corrupti inventore quod ea facilis molestiae quis ut magnam, nesciunt amet similique perferendis aut cupiditate sequi consectetur laborum dignissimos qui exercitationem cum?"
 
   return (
@@ -33,7 +44,7 @@ function Card({
           <div className='flex gap-4'>
             <div className='relative w-[120px] h-[120px] rounded-xl overflow-hidden shrink-0'>
               <Image 
-                src="/Rectangle4.png" 
+                src={randomImage} 
                 alt={Name}
                 fill
                 className='object-cover'
@@ -97,7 +108,7 @@ function Card({
             <div className='flex items-center gap-2'>
               <div className='relative w-12 h-12 rounded-full overflow-hidden shrink-0'>
                 <Image 
-                  src="/Rectangle4.png" 
+                  src={randomImage} 
                   alt={Name}
                   fill
                   className='object-cover'
@@ -171,4 +182,4 @@ function Card({
   )
 }
 
-export default Card
+export default Card;

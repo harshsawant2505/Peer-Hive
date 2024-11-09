@@ -2,7 +2,6 @@
 import React, { useEffect, useState, use } from 'react';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Calendar, Users, CheckSquare, Activity, Plus, FileText, MessageSquare, Menu } from 'lucide-react';
@@ -25,6 +24,7 @@ function Page({ params, searchParams }: any) {
   };
 
   const [user, setUser] = useState(null);
+  const [joined, setJoined] = useState<boolean>(false)
 
   const fetchUser = async () => {
     try {
@@ -37,6 +37,8 @@ function Page({ params, searchParams }: any) {
       console.error('Failed to fetch user', error);
     }
   };
+
+
 
   useEffect(() => {
     fetchUser();
@@ -72,7 +74,7 @@ function Page({ params, searchParams }: any) {
             </button>
           ))}
           <button className="w-full flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg transition">
-            <Plus size={16} /> New Thread
+            <div size={16} /> New Thread
           </button>
         </div>
       </div>
@@ -127,7 +129,7 @@ function Page({ params, searchParams }: any) {
       <div className="container mx-auto p-4 lg:p-6">
         <Card className="bg-slate-800/50 border-none text-white">
           <CardContent className="flex flex-col lg:flex-row justify-between items-start lg:items-center p-4 lg:p-6 gap-4">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-6 w-full lg:w-auto">
+            <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-6 w-full lg:w-auto">
               <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden">
                 <Image
                   src="/rectangle5.png"
@@ -140,15 +142,17 @@ function Page({ params, searchParams }: any) {
                 <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   {organiser}
                 </h1>
-                <p className="text-lg lg:text-xl text-gray-300">{college}</p>
-                <p className="text-sm text-gray-400 flex items-center gap-2">
+                <div className="text-lg lg:text-xl text-gray-300">{college}</div>
+                <div className="text-sm text-gray-400 flex items-center gap-2">
                   <Users size={16} /> {members} members
-                </p>
+                </div>
               </div>
+              { joined ? <button className='bg-red-500 w-20 px-2 py-1 rounded-lg' onClick={()=>setJoined(!joined)}>Exit</button>:
+              <button className='bg-green-500 w-20 px-2 py-1 rounded-lg' onClick={()=>setJoined(!joined)}>Join</button>}
             </div>
             <div className="flex flex-col gap-3 w-full lg:w-auto">
               <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg px-4 lg:px-6 py-2 border border-blue-500/30">
-                <p className="text-lg lg:text-xl font-semibold">Role: President</p>
+                <div className="text-lg lg:text-xl font-semibold">Role: President</div>
               </div>
               <div className="flex gap-3">
                 <button className="flex-1 lg:flex-none bg-blue-800 hover:bg-blue-900 transition px-4 py-2 rounded-lg text-sm">
@@ -188,7 +192,7 @@ function Page({ params, searchParams }: any) {
                       className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30"
                     >
                       <h3 className="font-semibold">{todo.title}</h3>
-                      <p className="text-gray-300 text-sm">{todo.description}</p>
+                      <div className="text-gray-300 text-sm">{todo.description}</div>
                     </div>
                   ))}
                 </div>
@@ -217,8 +221,8 @@ function Page({ params, searchParams }: any) {
                       key={index}
                       className="bg-blue-500/10 backdrop-blur-sm rounded-lg p-3 border border-blue-500/20"
                     >
-                      <p className="text-gray-300 text-sm">{member.role}</p>
-                      <p className="font-semibold">{member.name}</p>
+                      <div className="text-gray-300 text-sm">{member.role}</div>
+                      <div className="font-semibold">{member.name}</div>
                     </div>
                   ))}
                 </div>
@@ -242,8 +246,8 @@ function Page({ params, searchParams }: any) {
                       key={event.date}
                       className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 border border-blue-500/30"
                     >
-                      <p className="text-sm text-gray-300">{formatDate(event.date)}</p>
-                      <p className="font-semibold">{event.name}</p>
+                      <div className="text-sm text-gray-300">{formatDate(event.date)}</div>
+                      <div className="font-semibold">{event.name}</div>
                     </div>
                   ))}
                 </div>
