@@ -11,7 +11,7 @@ function Navbar({type}:any) {
 
     <div className={`hidden md:flex justify-between px-6 py-2 `}>
         <div className='flex justify-evenly gap-10 items-center '>
-            <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true}></Image>
+            <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
             <input 
                 type="text" 
                 placeholder="Search..." 
