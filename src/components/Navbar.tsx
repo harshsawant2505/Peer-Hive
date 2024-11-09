@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaUser, FaBars, FaTimes } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+import CreatePostDrawer from './CreateDrawer'
 
 function Navbar({type}:{type:string}) {
     const router = useRouter()
@@ -39,7 +40,7 @@ function Navbar({type}:{type:string}) {
                     <Link href={'/'} className={btclass}>Clubs</Link>
                     <Link href={'/'} className={btclass}>Councils</Link>
                     <Link href={'/'} className={btclass}>Events</Link>
-                    <Link href={'/'} className={btclass}>Create+</Link>  
+                    <CreatePostDrawer />
                     <Link href={'/'} className={btclass}>Join</Link>
                 </div>
                 <button className='h-full p-4'>
