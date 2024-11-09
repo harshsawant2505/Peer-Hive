@@ -28,23 +28,37 @@ const CreatePostDrawer = () => {
     description: ''
   });
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async(e:any) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    fetch('/api/addEntry', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
   };
 
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
-          <Plus className="mr-2 h-4 w-4" />
-          Create New
+        <Button className="bg-blue-600 hover:bg-blue-700 font-bold">
+          <Plus className="mr-2 h-4 w-4 " />
+         <span className='font-extrabold'> Create New</span>
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-slate-900 border-t border-slate-800">
         <div className="mx-auto w-full max-w-2xl">
           <DrawerHeader>
-            <DrawerTitle className="text-2xl font-bold text-white">Create New Post</DrawerTitle>
+            <DrawerTitle className="text-2xl font-bold text-white">Create New Extry</DrawerTitle>
           </DrawerHeader>
           
           <div className="p-4 pb-8">
@@ -52,7 +66,7 @@ const CreatePostDrawer = () => {
               {/* Post Type Selection */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-200">
-                  Post Type
+                  Entry Type
                 </label>
                 <Select 
                   onValueChange={(value) => setFormData({...formData, type: value})}
@@ -104,10 +118,10 @@ const CreatePostDrawer = () => {
                 onClick={handleSubmit}
                 className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
               >
-                Create Post
+                Create Entry
               </Button>
               <DrawerClose asChild>
-                <Button variant="outline" className="flex-1 border-slate-700 text-slate-200 hover:bg-slate-800 hover:text-white">
+                <Button variant="outline" className="flex-1 border-slate-700 text-black hover:bg-slate-800 hover:text-white">
                   Cancel
                 </Button>
               </DrawerClose>
