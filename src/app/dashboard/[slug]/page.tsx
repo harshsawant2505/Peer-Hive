@@ -5,8 +5,10 @@ import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Calendar, Users, CheckSquare, Activity, Plus, FileText, MessageSquare, Menu } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 function Page({ params, searchParams }: any) {
+  const router = useRouter();
     const unwrappedParams = React.use(params);
     const unwrappedSearch=React.use(searchParams);
     const organiser = decodeURIComponent(unwrappedParams.slug);
@@ -69,6 +71,12 @@ function Page({ params, searchParams }: any) {
             <button
               key={item}
               className="w-full text-left px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
+              onClick={()=>{
+                if(item=='Discussion'){
+                
+                  router.push(`/discussion?id=${organiser}`)
+                }
+              }}
             >
               {item}
             </button>
