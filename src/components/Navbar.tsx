@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
 
 function Navbar() {
-    const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-xl min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
+    const btclass = 'bg-[#FBBEFB] text-black font-bold px-3 py-1 rounded-xl min-w-[5vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
   return (
     <div>
 
@@ -13,10 +13,10 @@ function Navbar() {
             <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
             <input 
                 type="text" 
-                placeholder="search..." 
+                placeholder="Search" 
                 alt='search' 
                 aria-label='search'
-                className='bg-gray-600 text-white placeholder-white px-2 py-1 rounded-xl w-[15vw]'
+                className='bg-gray-600 text-white placeholder-white px-2 py-2 rounded-lg w-[15vw]'
                 />
             <Link href={'/'} className={btclass}>Clubs</Link>
             <Link href={'/'} className={btclass}>Councils</Link>
