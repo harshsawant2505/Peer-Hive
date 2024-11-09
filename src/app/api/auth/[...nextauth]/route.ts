@@ -30,9 +30,7 @@ export const authOption: NextAuthOptions = {
             
             if (!profile?.email) {
                 throw new Error("No profile");
-            }
-
-            
+            }            
                 const savedUser = await User.findOne({ email: profile.email});
                 if (!savedUser) {
                     
