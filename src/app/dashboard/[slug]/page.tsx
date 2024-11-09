@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Table } from 'lucide-react';
 
-function page({ params, searchParams }) {
+function page({ params, searchParams }:any) {
     const organiser = decodeURIComponent(params.slug);
     const college = searchParams.college || '';
     const members = searchParams.members || '';
