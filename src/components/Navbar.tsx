@@ -1,0 +1,35 @@
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FaUser } from 'react-icons/fa'
+
+function Navbar() {
+    const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-xl min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
+  return (
+    <div>
+
+    <div className='hidden md:flex justify-between px-6 py-2 '>
+        <div className='flex justify-evenly gap-10 items-center '>
+            <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true}></Image>
+            <input 
+                type="text" 
+                placeholder="search..." 
+                alt='search' 
+                aria-label='search'
+                className='bg-gray-600 text-white placeholder-white px-2 py-1 rounded-xl w-[15vw]'
+                />
+            <Link href={'/'} className={btclass}>Clubs</Link>
+            <Link href={'/'} className={btclass}>Councils</Link>
+            <Link href={'/'} className={btclass}>Events</Link>
+            <Link href={'/'} className={btclass}>Create+</Link>  
+            <Link href={'/'} className={btclass}>Join</Link>
+        </div>
+        <div className='h-full p-4'>
+            <FaUser size={30} /> 
+        </div>
+    </div>
+</div>
+  )
+}
+
+export default Navbar
