@@ -28,9 +28,11 @@ function Home() {
     { Name: "Google Cloud", Organiser: "Coders Club", College: "G.E.C", members: 1, type: "Council" },
   ];
 
+  
+
   return (
     <div className="bg-gradient-to-tr from-black   to-blue-950 w-full min-h-screen  overflow-x-hidden">
-      <Navbar />
+      <Navbar type="" />
       <div className="flex justify-center ">
 
         <div className="hidden lg:flex flex-wrap w-full justify-center items-center gap-5 py-8 overflow-x-hidden">
