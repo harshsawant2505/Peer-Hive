@@ -22,7 +22,7 @@ function Card({
   owner: string
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [randomImage, setRandomImage] = useState('/c1.png'); // Default image
+  const [randomImage, setRandomImage] = useState('/c1.jpeg'); // Default image
 
   // Array of image paths
   const imagePaths = ['/c1.jpeg', '/c2.jpeg', '/c3.jpeg', '/c4.jpeg', '/c5.jpeg', '/c6.jpeg', '/c7.jpeg'];
