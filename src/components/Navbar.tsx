@@ -14,7 +14,7 @@ function Navbar({type}:any) {
             <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
             <input 
                 type="text" 
-                placeholder="Search..." 
+                placeholder="Search" 
                 alt='search' 
                 aria-label='search'
                 className='bg-gray-600 text-white placeholder-white px-2 py-2 rounded-lg w-[15vw] border-none outline-none'
