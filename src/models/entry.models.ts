@@ -16,6 +16,10 @@ const entrySchema = new Schema(
       type: String,
       
     },
+    organization: {
+      type: String,
+      
+    },
   },
 
 );

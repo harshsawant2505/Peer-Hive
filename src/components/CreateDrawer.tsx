@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus } from "lucide-react";
+import { OrigamiIcon, Plus } from "lucide-react";
 import axios from 'axios';
 import toast,{Toaster} from 'react-hot-toast';
 
@@ -27,7 +27,8 @@ const CreatePostDrawer = () => {
   const [formData, setFormData] = useState({
     type: '',
     name: '',
-    description: ''
+    description: '',
+    organization: ''
   });
 
   const [loading, setloading] = useState(false)
@@ -107,6 +108,18 @@ const CreatePostDrawer = () => {
                   className="bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 focus-visible:ring-blue-600"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-200">
+                  Organization name
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Enter Org name"
+                  className="bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 focus-visible:ring-blue-600"
+                  value={formData.organization}
+                  onChange={(e) => setFormData({...formData, organization: e.target.value})}
                 />
               </div>
 

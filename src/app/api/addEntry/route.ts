@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const formData = await req.json();
     console.log(formData)
 
-    if(formData.name === "" || formData.description === "" || formData.type === ""){
+    if(formData.name === "" || formData.description === "" || formData.type === "", formData.organization === ""){
         return NextResponse.json({ message: "Please fill all the fields", success: false }, { status: 400 });
     }
     const college = req.cookies.get('college')?.value;
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
         des: formData.description,
         type: formData.type,
         college: college,
+        organization: formData.organization,
     });
 
     const savedEntry = await newEntry.save();
