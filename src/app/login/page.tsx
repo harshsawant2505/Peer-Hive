@@ -23,7 +23,7 @@ const LoginPage = () => {
             variant="outline" 
             className="w-full h-12 font-medium border-2 border-slate-800 bg-slate-900 text-white hover:bg-slate-800 hover:text-white transition-colors"
             onClick={() => {
-                signIn('google');
+                signIn('google', {callbackUrl: '/'});
                 console.log("Google sign in clicked");
             }}
             >

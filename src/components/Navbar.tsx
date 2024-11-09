@@ -17,7 +17,7 @@ function Navbar({type}:{type:string}) {
                 placeholder="Search" 
                 alt='search' 
                 aria-label='search'
-                className='bg-gray-600 text-white placeholder-white px-2 py-2 rounded-lg w-[15vw]'
+                className='bg-gray-600 text-white placeholder-white px-2 py-2 rounded-lg w-[15vw] border-none outline-none'
                 />
             <Link href={'/'} className={btclass}>Clubs</Link>
             <Link href={'/'} className={btclass}>Councils</Link>
