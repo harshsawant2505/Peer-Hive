@@ -20,6 +20,9 @@ const entrySchema = new Schema(
       type: String,
       
     },
+    college: {
+      type: String,
+    }
   },
 
 );
