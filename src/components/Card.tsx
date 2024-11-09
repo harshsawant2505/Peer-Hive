@@ -9,13 +9,15 @@ function Card({
   Organiser,
   College,
   members,
-  type
+  type,
+  des
 }: {
   Name: string,
   Organiser: string,
   College: string,
   members: number,
-  type: string
+  type: string,
+  des: string
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [randomImage, setRandomImage] = useState('/c1.png'); // Default image
@@ -45,7 +47,7 @@ function Card({
             <div className='relative w-[120px] h-[120px] rounded-xl overflow-hidden shrink-0'>
               <Image 
                 src={randomImage} 
-                alt={Name}
+                alt={'this is image'}
                 fill
                 className='object-cover'
                 sizes="120px"
@@ -79,7 +81,7 @@ function Card({
           </div>
 
           <div className='text-gray-300 text-sm leading-relaxed'>
-            {desc.split(' ').slice(0, 15).join(' ')}...
+            {des}...
           </div>
 
           <div className='h-px bg-gradient-to-r from-transparent via-[#EC41F2]/50 to-transparent'></div>
@@ -109,7 +111,7 @@ function Card({
               <div className='relative w-12 h-12 rounded-full overflow-hidden shrink-0'>
                 <Image 
                   src={randomImage} 
-                  alt={Name}
+                  alt={'this is image'}
                   fill
                   className='object-cover'
                   sizes="48px"

@@ -30,12 +30,11 @@ function Page() {
     }, []);
 
     const handleLogout = async () => {
-        try {
-            await axios.get("/api/auth/logout");
-            router.push("/login");
-        } catch (error) {
-            console.log(error);
-        }
+       await signOut()
+       console.log("logged out")
+       router.push("/landing");
+
+
     };
 
     if (isLoading) {

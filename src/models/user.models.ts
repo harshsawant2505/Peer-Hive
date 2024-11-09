@@ -40,6 +40,10 @@ const userSchema = new Schema(
       default:0
     },
     expenses: [expenseSchema],
+    college:{
+      type: String,
+
+    }
   },
 
 );

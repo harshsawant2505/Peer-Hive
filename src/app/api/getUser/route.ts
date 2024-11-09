@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     
   
     const session:any = await getServerSession(authOption);
-    console.log("session",session.user.email)
+    console.log("session",session?.user?.email)
     // const token = req.cookies.get('token')?.value;
 
      

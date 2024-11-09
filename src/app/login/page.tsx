@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from '@/components/Navbar';
@@ -11,7 +11,12 @@ const LoginPage = () => {
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedCollege, setSelectedCollege] = useState("");
 
-  const colleges = ["College A", "College B", "College C", "College D"];
+  const colleges = ["GEC", "NIT Goa", "IIT Bombay", "PCCE"];
+
+  useEffect(() => {
+    document.cookie = `college=${selectedCollege}`;
+    router.refresh();
+  }, [selectedCollege]);
 
   return (
     <div className='bg-[#020817] min-h-screen w-full'>
