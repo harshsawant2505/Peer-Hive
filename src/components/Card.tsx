@@ -7,11 +7,6 @@ import { FaCalendarDays } from 'react-icons/fa6'
 function Card({Name,Organiser,College,members,type }:{Name:string,Organiser:string,College:string, members:number,type:string}) {
     const btclass = 'bg-[#FBBEFB] text-black text-sm  rounded-xl min-w-[30%] text-center cursor-pointer '
 
-    const redirectToPage = () => {
-        console.log("Redirecting to the page")
-    }
-
-
   return (
     <div className=' min-w-[15vw] text-white bg-gradient-to-tr from-black to-blue-950 w-[30vw] border border-l-[#EC41F2] border-b-[#EC41F2] border-t-[#EC41F2] border-r-[#721d75fb] rounded-3xl p-4 overflow-hidden'>
         <div className='flex gap-4 p-4'>
@@ -22,7 +17,7 @@ function Card({Name,Organiser,College,members,type }:{Name:string,Organiser:stri
                     <div className='bg-gray-600 rounded-xl px-2 py-1'>{type}</div>
                 </div>
                 <div className='font-extrabold text-3xl'>{Name}</div>
-                <div onClick={()=>redirectToPage()}>{Organiser}</div>
+                <Link href={`/dashboard/${Organiser}?college=${College}&members=${members}`}>{Organiser}</Link>
                 <div>{College}</div>
             </div>
         </div>
