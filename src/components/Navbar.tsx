@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
 
-function Navbar({type}:any) {
+function Navbar({type}:{type:string}) {
     console.log(type)
     const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-lg min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
   return (
@@ -11,7 +11,7 @@ function Navbar({type}:any) {
 
     <div className={`hidden md:flex justify-between px-6 py-2 `}>
         <div className='flex justify-evenly gap-10 items-center '>
-            <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
+            <Image src={"/icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
             <input 
                 type="text" 
                 placeholder="Search" 

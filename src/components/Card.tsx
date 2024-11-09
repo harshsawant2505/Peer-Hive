@@ -17,7 +17,7 @@ function Card({Name,Organiser,College,members,type }:{Name:string,Organiser:stri
                     <div className='bg-gray-600 rounded-xl px-2 py-1'>{type}</div>
                 </div>
                 <div className='font-extrabold text-3xl'>{Name}</div>
-                <Link href={`/dashboard/${Organiser}`}>{Organiser}</Link>
+                <Link href={`/dashboard/${Organiser}?college=${College}&members=${members}`}>{Organiser}</Link>
                 <div>{College}</div>
             </div>
         </div>
