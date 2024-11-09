@@ -18,10 +18,10 @@ function Navbar({type}:{type:string}) {
     }
 
     return (
-        <div className={`${type == 'fixed' && 'absolute'} w-full`}>
+        <div className={`${type == 'fixed' && 'absolute'} w-full z-10`}>
             {/* Desktop Navigation */}
-            <div className="hidden md:flex justify-between px-6 py-2">
-                <div className='flex justify-evenly gap-10 items-center'>
+            <div className="hidden md:flex justify-between px-6 py-2 z-10">
+                <div className='flex justify-evenly gap-10 items-center z-10'>
                     <Image 
                         src="/icon.png" 
                         alt='Icon' 
@@ -53,7 +53,7 @@ function Navbar({type}:{type:string}) {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden">
+            <div className="md:hidden z-10">
                 <div className="flex justify-between items-center px-4 py-2">
                     <Image 
                         src="/icon.png" 
@@ -82,7 +82,7 @@ function Navbar({type}:{type:string}) {
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className="absolute top-[60px] left-0 w-full bg-black bg-opacity-95 px-4 py-4 flex flex-col gap-4">
+                    <div className="absolute z-10 top-[60px] left-0 w-full bg-black bg-opacity-95 px-4 py-4 flex flex-col gap-4">
                         <Link href={'/'} className={mobileBtClass}>Clubs</Link>
                         <Link href={'/'} className={mobileBtClass}>Councils</Link>
                         <Link href={'/'} className={mobileBtClass}>Events</Link>

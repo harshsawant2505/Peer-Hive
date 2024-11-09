@@ -1,30 +1,49 @@
-'use client'
-import React, { useEffect, useState, use } from 'react';
-import Navbar from '@/components/Navbar';
-import Image from 'next/image';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Calendar, Users, CheckSquare, Activity, Plus, FileText, MessageSquare, Menu } from 'lucide-react';
+"use client";
+import React, { useEffect, useState, use } from "react";
+import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import BudgetInput from "@/components/BudgetInput";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import {
+  Calendar,
+  Users,
+  CheckSquare,
+  Activity,
+  Plus,
+  FileText,
+  MessageSquare,
+  Menu,
+} from "lucide-react";
 
 function Page({ params, searchParams }: any) {
-    const unwrappedParams = React.use(params);
-    const unwrappedSearch=React.use(searchParams);
-    const organiser = decodeURIComponent(unwrappedParams.slug);
-    // const college = searchParams.college || '';
-    // const members = searchParams.members || '';
-    const college=unwrappedSearch.college;
-    const members=unwrappedSearch.members;
-    console.log(organiser, college, members);
+  const unwrappedParams = React.use(params);
+  const unwrappedSearch = React.use(searchParams);
+  const organiser = decodeURIComponent(unwrappedParams.slug);
+  // const college = searchParams.college || '';
+  // const members = searchParams.members || '';
+  const college = unwrappedSearch.college;
+  const members = unwrappedSearch.members;
+  console.log(organiser, college, members);
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
+  const [isBudgetSet, setIsBudgetSet] = useState<boolean>(false);
+  const [budget, setBudget] = useState<number>(0);
+
   const [user, setUser] = useState(null);
-  const [joined, setJoined] = useState<boolean>(false)
+  const [joined, setJoined] = useState<boolean>(false);
 
   const fetchUser = async () => {
     try {
@@ -34,14 +53,20 @@ function Page({ params, searchParams }: any) {
         setUser(temp.user);
       }
     } catch (error) {
-      console.error('Failed to fetch user', error);
+      console.error("Failed to fetch user", error);
     }
   };
 
-
-
   useEffect(() => {
     fetchUser();
+    if(user?.budget){
+      setIsBudgetSet(true);
+      setBudget(user?.budget);
+    }
+    else{
+      setIsBudgetSet(false);
+      setBudget(0);
+    }
   }, []);
 
   const events = [
@@ -54,7 +79,10 @@ function Page({ params, searchParams }: any) {
 
   const todos = [
     { title: "Meeting @6PM", description: "Discuss about budget" },
-    { title: "Member Discussion", description: "AI-general members want a session on blockchain" },
+    {
+      title: "Member Discussion",
+      description: "AI-general members want a session on blockchain",
+    },
     { title: "Meeting Tomorrow", description: "Plan upcoming events" },
   ];
 
@@ -65,7 +93,7 @@ function Page({ params, searchParams }: any) {
           <MessageSquare size={20} /> Threads
         </h2>
         <div className="space-y-2">
-          {['Announcements', 'Management', 'Discussion'].map((item) => (
+          {["Announcements", "Management", "Discussion"].map((item) => (
             <button
               key={item}
               className="w-full text-left px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
@@ -85,10 +113,10 @@ function Page({ params, searchParams }: any) {
         </h2>
         <div className="space-y-2">
           {[
-            'Generate POA',
-            'Collect Issues',
-            'Schedule Meeting',
-            'Schedule Announcement'
+            "Generate POA",
+            "Collect Issues",
+            "Schedule Meeting",
+            "Schedule Announcement",
           ].map((item) => (
             <button
               key={item}
@@ -105,16 +133,22 @@ function Page({ params, searchParams }: any) {
   return (
     <div className="min-h-screen bg-gradient-to-tr from-black   to-blue-950">
       <Navbar type="" />
-      
+
       {/* Mobile Menu Button */}
       <div className="lg:hidden fixed bottom-4 right-4 z-50">
         <Sheet>
           <SheetTrigger asChild>
-            <button className="p-3 bg-blue-600 text-white rounded-full shadow-lg" aria-label="Open menu">
+            <button
+              className="p-3 bg-blue-600 text-white rounded-full shadow-lg"
+              aria-label="Open menu"
+            >
               <Menu size={24} />
             </button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] bg-slate-900 text-white">
+          <SheetContent
+            side="right"
+            className="w-[300px] bg-slate-900 text-white"
+          >
             <SheetHeader>
               <SheetTitle className="text-white">Navigation Menu</SheetTitle>
             </SheetHeader>
@@ -142,25 +176,40 @@ function Page({ params, searchParams }: any) {
                 <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   {organiser}
                 </h1>
-                <div className="text-lg lg:text-xl text-gray-300">{college}</div>
+                <div className="text-lg lg:text-xl text-gray-300">
+                  {college}
+                </div>
                 <div className="text-sm text-gray-400 flex items-center gap-2">
                   <Users size={16} /> {members} members
                 </div>
               </div>
-              { joined ? <button className='bg-red-500 w-20 px-2 py-1 rounded-lg' onClick={()=>setJoined(!joined)}>Exit</button>:
-              <button className='bg-green-500 w-20 px-2 py-1 rounded-lg' onClick={()=>setJoined(!joined)}>Join</button>}
+              {joined ? (
+                <button
+                  className="bg-red-500 w-20 px-2 py-1 rounded-lg"
+                  onClick={() => setJoined(!joined)}
+                >
+                  Exit
+                </button>
+              ) : (
+                <button
+                  className="bg-green-500 w-20 px-2 py-1 rounded-lg"
+                  onClick={() => setJoined(!joined)}
+                >
+                  Join
+                </button>
+              )}
             </div>
             <div className="flex flex-col gap-3 w-full lg:w-auto">
               <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg px-4 lg:px-6 py-2 border border-blue-500/30">
-                <div className="text-lg lg:text-xl font-semibold">Role: President</div>
+                <div className="text-lg lg:text-xl font-semibold">
+                  Role: President
+                </div>
               </div>
               <div className="flex gap-3">
                 <button className="flex-1 lg:flex-none bg-blue-800 hover:bg-blue-900 transition px-4 py-2 rounded-lg text-sm">
                   Manage Events
                 </button>
-                <button className="flex-1 lg:flex-none bg-emerald-600 hover:bg-emerald-700 transition px-4 py-2 rounded-lg text-sm">
-                  View Budget
-                </button>
+                <BudgetInput/>
               </div>
             </div>
           </CardContent>
@@ -192,7 +241,9 @@ function Page({ params, searchParams }: any) {
                       className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30"
                     >
                       <h3 className="font-semibold">{todo.title}</h3>
-                      <div className="text-gray-300 text-sm">{todo.description}</div>
+                      <div className="text-gray-300 text-sm">
+                        {todo.description}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -209,13 +260,13 @@ function Page({ params, searchParams }: any) {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { role: 'President', name: 'You' },
-                    { role: 'Vice President', name: 'Chinmay' },
-                    { role: 'Chairman', name: 'Harsh Sawant' },
-                    { role: 'Treasurer', name: 'Harsh Sawant' },
-                    { role: 'Web Dev Lead', name: 'Harsh Sawant' },
-                    { role: 'Cloud Lead', name: 'Chinmay' },
-                    { role: 'ML Lead', name: 'Kedron' },
+                    { role: "President", name: "You" },
+                    { role: "Vice President", name: "Chinmay" },
+                    { role: "Chairman", name: "Harsh Sawant" },
+                    { role: "Treasurer", name: "Harsh Sawant" },
+                    { role: "Web Dev Lead", name: "Harsh Sawant" },
+                    { role: "Cloud Lead", name: "Chinmay" },
+                    { role: "ML Lead", name: "Kedron" },
                   ].map((member, index) => (
                     <div
                       key={index}
@@ -246,7 +297,9 @@ function Page({ params, searchParams }: any) {
                       key={event.date}
                       className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 border border-blue-500/30"
                     >
-                      <div className="text-sm text-gray-300">{formatDate(event.date)}</div>
+                      <div className="text-sm text-gray-300">
+                        {formatDate(event.date)}
+                      </div>
                       <div className="font-semibold">{event.name}</div>
                     </div>
                   ))}
