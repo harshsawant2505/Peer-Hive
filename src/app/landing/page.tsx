@@ -31,22 +31,11 @@ const LandingPage = () => {
             </Button>
           </div>
 
-          <div className={`md:hidden absolute top-20 left-0 right-0 bg-gray-800 p-4 transform transition-transform duration-300 ease-in-out translate-y-0 `}>
-            <div className="flex flex-col gap-4">
-              
-              <Button
-                variant="outline"
-                className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-full"
-                onClick={() => router.push('/login')}
-              >
-                Sign Up
-              </Button>
-            </div>
-          </div>
+      
         </nav>
 
         {/* Hero Section (same as before) */}
-        <div className="flex  md:flex-row justify-around items-center gap-12 py-12 min-h-screen">
+        <div className="flex flex-col  md:flex-row justify-around items-center gap-12 py-12 min-h-screen">
           <div className=" md:w-1/2 space-y-6 animate-fade-in ">
             <h1 className="text-6xl font-bold mb-10 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               Discover and Join Student Clubs That Matter
@@ -70,7 +59,7 @@ const LandingPage = () => {
             <img
               src="/studentImage.jpeg"
               alt="Students collaborating"
-              className="rounded-lg shadow-2xl transform hover:scale-105 transition-all duration-300 w-[25vw]"
+              className="rounded-lg shadow-2xl transform hover:scale-105 transition-all duration-300 w-[50vw] md:w-[25vw]"
             />
           </div>
         </div>
