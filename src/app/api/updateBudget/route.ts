@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
     
-    const { budget } = await req.json();
-    const session:any = await getServerSession(authOption);
+    const { amount, description, remainingBudget } = await req.json();
+    const session: any = await getServerSession(authOption);
     
     if (!session || !session.user.email) {
       return NextResponse.json(
@@ -18,11 +18,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Update user's budget
+    // Update user's budget and add expense record
     const updatedUser = await User.findOneAndUpdate(
       { email: session.user.email },
-      { $set: { budget: budget } },
-      { new: true } // This option returns the updated document
+      { 
+        $set: { budget: remainingBudget },
+        $push: { 
+          expenses: {
+            amount,
+            description,
+            date: new Date()
+          }
+        }
+      },
+      { new: true }
     );
 
     if (!updatedUser) {
@@ -34,15 +43,15 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { 
-        message: "Budget updated successfully", 
+        message: "Budget spent successfully", 
         success: true,
-        user: updatedUser 
+        remainingBudget: updatedUser.budget
       }, 
       { status: 200 }
     );
 
   } catch (error) {
-    console.error("Error at profile route:", error);
+    console.error("Error at spend budget route:", error);
     return NextResponse.json(
       { message: "Internal server error", success: false },
       { status: 500 }

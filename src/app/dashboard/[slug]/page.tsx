@@ -59,7 +59,7 @@ function Page({ params, searchParams }: any) {
 
   useEffect(() => {
     fetchUser();
-    if(user?.budget){
+    if(user?.budget > 0){
       setIsBudgetSet(true);
       setBudget(user?.budget);
     }
@@ -209,7 +209,7 @@ function Page({ params, searchParams }: any) {
                 <button className="flex-1 lg:flex-none bg-blue-800 hover:bg-blue-900 transition px-4 py-2 rounded-lg text-sm">
                   Manage Events
                 </button>
-                <BudgetInput/>
+                <BudgetInput isBudgetSet={isBudgetSet} budget={budget} setBudget={setBudget} setIsBudgetSet={setIsBudgetSet}/>
               </div>
             </div>
           </CardContent>
