@@ -1,9 +1,12 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 function Navbar({type}:{type:string}) {
+    const router = useRouter()
     console.log(type)
     const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-lg min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
   return (
@@ -25,9 +28,9 @@ function Navbar({type}:{type:string}) {
             <Link href={'/'} className={btclass}>Create+</Link>  
             <Link href={'/'} className={btclass}>Join</Link>
         </div>
-        <div className='h-full p-4'>
-            <FaUser className='text-white' size={30} /> 
-        </div>
+        <button className='h-full p-4'>
+            <FaUser className='text-white' size={30} onClick={()=>router.push('/profile')} /> 
+        </button>
     </div>
 </div>
   )

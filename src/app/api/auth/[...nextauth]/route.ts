@@ -4,7 +4,7 @@ import { connectDB } from "@/config/dbConfig";
 import User from "@/models/user.models";
 import { cookies } from 'next/headers';
 
-const authOption: NextAuthOptions = {
+export const authOption: NextAuthOptions = {
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60,

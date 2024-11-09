@@ -1,14 +1,17 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState, use } from 'react';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 
-function page({ params, searchParams }:any) {
-    const organiser = decodeURIComponent(params.slug);
-    const college = searchParams.college || '';
-    const members = searchParams.members || '';
+ function page({ params, searchParams }:any) {
+    const {slug}:any = use(params);
+    const {organiser, college, members}:any = use(searchParams);
+    // const organiser = decodeURIComponent(slug);
+    // const college = searchParams.college || '';
+    // const members = searchParams.members || '';
 
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -17,6 +20,27 @@ function page({ params, searchParams }:any) {
             day: 'numeric'
         });
     };
+
+    const [user, setUser] = useState(null);
+
+    const fetchUser = async () => {
+        try {
+            const response = await fetch(`/api/getUser`);
+            if (response.ok) {
+                const temp = await response.json();
+                setUser(temp.user);
+                console.log(temp.user);
+            } else {
+                console.error('Failed to fetch user');
+            }
+        } catch (error) {
+            console.error('Failed to fetch user', error);
+        }
+    }
+
+    useEffect(() => {
+        fetchUser()
+    }, []);
 
     const events = [
         { date: "2024-11-15", name: "Hackathon Prep Workshop" },
@@ -28,7 +52,7 @@ function page({ params, searchParams }:any) {
 
     return (
         <div className="bg-gradient-to-tr from-black to-blue-950 w-full min-h-screen overflow-x-hidden text-white">
-            <Navbar />
+            <Navbar type='' />
             <div className="flex justify-between items-center p-8">
                 <div className='flex justify-center items-center gap-4'>
                     <Image src={"/rectangle5.png"} width={100} height={100} alt="ClubPhoto" className="" />
@@ -49,16 +73,16 @@ function page({ params, searchParams }:any) {
             <div className='flex justify-between p-6 items-start w-full gap-2'>
                 <div className='flex justify-center gap-5 items-start'>
                 <div className='flex flex-col gap-3 pr-5 border-r-2 ' >
-                    <div className='font-bold text-lg'>Threads</div>
-                    <div>Announcements</div>
-                    <div>Management</div>
-                    <div>Discussion</div>
-                    <div>Thread +</div>
-                    <div>Tools</div>
-                    <div>Generate POA</div>
-                    <div>Collect Issues</div>
-                    <div>Schedule Meeting</div>
-                    <div>Schedule Announcement</div>
+                    <div className='font-bold text-2xl'>Threads</div>
+                    <div className='text-gray-400'>Announcements</div>
+                    <div className='text-gray-400'>Management</div>
+                    <div className='text-gray-400'>Discussion</div>
+                    <button className='bg-gray-300 text-black rounded-md hover:bg-gray-200 px-2 py-1'>Thread +</button>
+                    <div className='font-bold text-2xl'>Tools</div>
+                    <div className='text-gray-400'>Generate POA</div>
+                    <div className='text-gray-400'>Collect Issues</div>
+                    <div className='text-gray-400'>Schedule Meeting</div>
+                    <div className='text-gray-400'>Schedule Announcement</div>
                 </div>
                 
                 <div>
@@ -81,13 +105,13 @@ function page({ params, searchParams }:any) {
                     <div className='flex flex-col gap-2'>
                         <h1 className='font-bold text-xl'>Members</h1>
                         <div>
-                            <p>President - You</p>
-                            <p>Vise - President - Chinmay</p>
-                            <p>Chairman - Harsh Sawant</p>
-                            <p>Treasurer - Harsh Sawant</p>
-                            <p>Web Dev Lead - Harsh Sawant</p>
-                            <p>Cloud Lead - Chinmay</p>
-                            <p>ML Lead - Kedron</p>
+                            <p className='text-gray-400'>President - You</p>
+                            <p className='text-gray-400'>Vice President - Chinmay</p>
+                            <p className='text-gray-400'>Chairman - Harsh Sawant</p>
+                            <p className='text-gray-400'>Treasurer - Harsh Sawant</p>
+                            <p className='text-gray-400'>Web Dev Lead - Harsh Sawant</p>
+                            <p className='text-gray-400'>Cloud Lead - Chinmay</p>
+                            <p className='text-gray-400'>ML Lead - Kedron</p>
                         </div></div>
 
                     
