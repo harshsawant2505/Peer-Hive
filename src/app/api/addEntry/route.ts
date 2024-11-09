@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/models/user.models";
+// import User from "@/models/user.models";
+import Entry from "@/models/entry.models";
 // import jwt, { JwtPayload } from "jsonwebtoken";
 import { connectDB } from "@/config/dbConfig";
 
-import {getToken} from 'next-auth/jwt';
-// import { getSessionToken } from "@/app/utils/getSession";
+
+
 
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
@@ -16,30 +17,28 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const {des, name, type} = await req.json();
-    console.log(des, name, type)
-    
+    const formData = await req.json();
+    console.log(formData)
+
+    if(formData.name === "" || formData.description === "" || formData.type === ""){
+        return NextResponse.json({ message: "Please fill all the fields", success: false }, { status: 400 });
+    }
+    const college = req.cookies.get('college')?.value;
+    console.log(college)
     const session:any = await getServerSession(authOption);
-    console.log("session",session.user.email)
+    console.log("session",session)
     
 
-         
-    const newEntry = new User({
-        name: name,
-        description: des,
-        type: type,
-        college: session.user.email
+    const newEntry = new Entry({
+        name: formData.name,
+        des: formData.description,
+        type: formData.type,
+        college: college,
     });
-    const savedUser = await newEntry.save();
-    console.log(savedUser);
-          
-         console.log(user);
-         if (!user) {
-            return NextResponse.json({ message: "User not found", success: false }, { status: 404 });
-          }else{
 
-              return NextResponse.json({ id: user._id, user: user, name: user.name }, { status: 200 });
-          }
+    const savedEntry = await newEntry.save();
+    console.log(savedEntry);
+    return NextResponse.json({ message: "Entry added", success: true }, { status: 200 });   
         
 
   

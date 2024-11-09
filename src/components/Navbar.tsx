@@ -19,6 +19,7 @@ function Navbar({type}:{type:string}) {
 
     return (
         <div className={`${type == 'fixed' && 'absolute'} w-full`}>
+            
             {/* Desktop Navigation */}
             <div className="hidden md:flex justify-between px-6 py-2">
                 <div className='flex justify-evenly gap-10 items-center'>

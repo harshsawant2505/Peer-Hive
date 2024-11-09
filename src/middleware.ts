@@ -31,6 +31,8 @@ export const config = {
     
     '/',
     '/login',
+    '/landing',
+    '/profile',
    
     ]
 }

@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus } from "lucide-react";
+import axios from 'axios';
+import toast,{Toaster} from 'react-hot-toast';
 
 const CreatePostDrawer = () => {
   const [formData, setFormData] = useState({
@@ -28,27 +30,38 @@ const CreatePostDrawer = () => {
     description: ''
   });
 
+  const [loading, setloading] = useState(false)
+
   const handleSubmit = async(e:any) => {
+
+    try {
+        
+  
+    setloading(true)
     e.preventDefault();
     console.log('Form submitted:', formData);
-    fetch('/api/addEntry', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+    const res = await axios.post('/api/addEntry', formData);
+
+    if(res.data.success){
+      console.log('Entry added successfully');
+      setloading(false)
+      alert(res.data.message)
+    } else {
+        alert(res.data.message)
+        setloading(false)
+      console.log('Error adding entry');
+    }
+
+} catch (error) {
+       alert("Error adding entry")
+       setloading(false)
+    console.log(error); 
+}
   };
 
   return (
     <Drawer>
+        
       <DrawerTrigger asChild>
         <Button className="bg-blue-600 hover:bg-blue-700 font-bold">
           <Plus className="mr-2 h-4 w-4 " />
@@ -118,7 +131,7 @@ const CreatePostDrawer = () => {
                 onClick={handleSubmit}
                 className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
               >
-                Create Entry
+                {!loading?"Create Entry": "Creating Entry..."}
               </Button>
               <DrawerClose asChild>
                 <Button variant="outline" className="flex-1 border-slate-700 text-black hover:bg-slate-800 hover:text-white">
