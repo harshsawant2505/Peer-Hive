@@ -13,7 +13,27 @@ const LoginPage = () => {
 
   return (
     <div className='bg-[#020817] min-h-screen w-full'>
-      <Navbar type='fixed' />
+      <nav className="flex absolute w-[90%] justify-between items-center mb-16 p-5">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            PEER HIVE
+          </div>
+
+          
+         
+
+          <div className={`md:hidden absolute top-20 left-0 right-0 bg-gray-800 p-4 transform transition-transform duration-300 ease-in-out translate-y-0 `}>
+            <div className="flex flex-col gap-4">
+              
+              <Button
+                variant="outline"
+                className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-full"
+                onClick={() => router.push('/login')}
+              >
+                Sign Up
+              </Button>
+            </div>
+          </div>
+        </nav>
       <div className="w-full h-screen flex items-center justify-center ">
         <Card className="w-full max-w-md p-2 bg-slate-900 border-slate-800">
           <CardHeader className="space-y-1 text-center">
