@@ -25,7 +25,7 @@ function Navbar() {
             <Link href={'/'} className={btclass}>Join</Link>
         </div>
         <div className='h-full p-4'>
-            <FaUser size={30} /> 
+            <FaUser className='text-white' size={30} /> 
         </div>
     </div>
 </div>
