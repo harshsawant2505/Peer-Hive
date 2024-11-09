@@ -3,12 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
 
-function Navbar() {
-    const btclass = 'bg-[#FBBEFB] text-black font-bold px-3 py-1 rounded-xl min-w-[5vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
+function Navbar({type}:any) {
+    console.log(type)
+    const btclass = 'bg-[#FBBEFB] text-black font-extrabold px-3 py-2 rounded-lg min-w-[7vw] text-center cursor-pointer hover:bg-[#FBBEFB] hover:text-black'
   return (
-    <div>
+    <div className={`${type == 'fixed'&&'absolute'} w-full`}>
 
-    <div className='hidden md:flex justify-between px-6 py-2 '>
+    <div className={`hidden md:flex justify-between px-6 py-2 `}>
         <div className='flex justify-evenly gap-10 items-center '>
             <Image src={"./icon.png"} alt='Icon' width={60} height={60} unoptimized={true} className='rounded-full'></Image>
             <input 
