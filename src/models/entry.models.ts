@@ -22,6 +22,9 @@ const entrySchema = new Schema(
       type: String,
       
     },
+    college: {
+      type: String,
+    },
     owner:{
       type: String,
     }

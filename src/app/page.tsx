@@ -90,7 +90,7 @@ useEffect(()=>{
               <Card
                 Name={card.Name}
                 Organiser={card.Organiser}
-                College={}
+                College={card.college}
                 members={card.members}
                 type={card.type}
                 des = {card.des}
