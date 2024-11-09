@@ -2,20 +2,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const expenseSchema = new mongoose.Schema({
-  amount: {
-    type: Number,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  }
-});
+
 
 const userSchema = new Schema(
   {
@@ -35,15 +22,12 @@ const userSchema = new Schema(
         type: String,
         default: "user",
     },
-    budget:{
-      type: Number,
-      default:0
-    },
-    expenses: [expenseSchema],
     college:{
       type: String,
 
-    }
+    },
+    ownerOf:[String],
+    memberOf:[String],
   },
 
 );

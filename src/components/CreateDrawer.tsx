@@ -45,8 +45,11 @@ const CreatePostDrawer = () => {
       e.preventDefault();
       console.log('Form submitted:', formData);
       const res = await axios.post('/api/addEntry', formData);
-
-      if (res.data.success) {
+      const resUser=await axios.post('/api/updateUser', {email:token?.user?.email, name: formData.name})
+      if(resUser.data.success){
+        console.log('User updated successfully');
+      }
+      if (res.data.success ) {
         console.log('Entry added successfully');
         setloading(false)
         alert(res.data.message)

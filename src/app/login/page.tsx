@@ -24,8 +24,6 @@ const LoginPage = () => {
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
             PEER HIVE
           </div>
-
-          
          
 
           <div className={`md:hidden absolute top-20 left-0 right-0 bg-gray-800 p-4 transform transition-transform duration-300 ease-in-out translate-y-0 `}>
