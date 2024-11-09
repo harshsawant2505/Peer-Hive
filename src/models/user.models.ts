@@ -15,8 +15,13 @@ const userSchema = new Schema(
     },
     profilePic: {
         type: String,
-        },
+    },
+    role: {
+        type: String,
+        default: "user",
+    }
   },
+
 );
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

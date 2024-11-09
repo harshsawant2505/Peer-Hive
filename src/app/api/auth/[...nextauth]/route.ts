@@ -25,7 +25,8 @@ const authOption: NextAuthOptions = {
 
             console.log("entered herer in route")
             await connectDB();
-          
+            const userType =  await cookies().get('userType')?.value;
+        console.log('User type from cookie:', userType);
             
             if (!profile?.email) {
                 throw new Error("No profile");
@@ -40,10 +41,11 @@ const authOption: NextAuthOptions = {
                             name: profile.name,
                             email: profile.email,
                             profilePic:profile.picture,
+                            role: userType
                            
                         });
                         const savedUser = await newUser.save();
-                        console.log(profile);
+                        console.log(savedUser);
                         return true;
                     
                 }
