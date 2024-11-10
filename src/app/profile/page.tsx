@@ -90,9 +90,9 @@ function Page() {
                         <hr className="w-[100%] opacity-25" />
                         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {user.memberOf && user.memberOf.length > 0 ? (
-                                user.memberOf.map((club) => (
+                                user.memberOf.map((club:any, index:any) => (
                                     <div 
-                                        key={Math.random()*400} 
+                                        key={index} 
                                         className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
                                     >
                                         <div className="flex items-center gap-3">
@@ -125,9 +125,9 @@ function Page() {
                         <hr className="w-[100%] opacity-25" />
                         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {user.ownerOf && user.ownerOf.length > 0 ? (
-                                user.ownerOf.map((club: any) => (
+                                user.ownerOf.map((club: any,index:any) => (
                                     <div 
-                                        key={club.id} 
+                                        key={index} 
                                         className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
                                     >
                                         <div className="flex items-center gap-3">
