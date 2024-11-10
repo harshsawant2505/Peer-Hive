@@ -122,7 +122,7 @@ const TodoSection = ({name}) => {
           
           {todos.map((todo) => (
             <div
-              key={todo.id}
+              key={todo.id || Math.random()*20}
               className={`bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30 transition ${
                 todo.completed ? 'opacity-60' : ''
               }`}

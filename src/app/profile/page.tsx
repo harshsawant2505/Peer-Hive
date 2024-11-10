@@ -15,9 +15,7 @@ function Page() {
 
     useEffect(() => {
         const fetchUser = async () => {
-            
             try {
-
                 const response = await axios.get("/api/getUser");
                 setUser(response.data.user);
                 setIsLoading(false);
@@ -33,8 +31,6 @@ function Page() {
        await signOut()
        console.log("logged out")
        router.push("/landing");
-
-
     };
 
     if (isLoading) {
@@ -85,30 +81,76 @@ function Page() {
                         </div>
                     </div>
                 </div>
-            <div  className="text-white bg-black to-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-xl py-6">
-            <div className=" ml-6 p-3">
-              <p className="text-xl  flex items-center gap-3 text-white font-bold">
-                Clubs joined
-              
-              </p>
-              <hr className="w-[100%] opacity-25 " />
-              <div className="mt-5">
-                <p className="text-white opacity-80">{user.name}</p>
-              </div>
-            </div>
-          </div>
-            <div  className="text-white bg-black to-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-xl py-6">
-            <div className=" ml-6 p-3">
-              <p className="text-xl  flex items-center gap-3 text-white font-bold">
-                Clubs Created
-              
-              </p>
-              <hr className="w-[100%] opacity-25 " />
-              <div className="mt-5">
-                <p className="text-white opacity-80">{user.name}</p>
-              </div>
-            </div>
-          </div>
+                
+                <div className="text-white bg-black to-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-xl py-6">
+                    <div className="ml-6 p-3">
+                        <p className="text-xl flex items-center gap-3 text-white font-bold">
+                            Clubs Joined
+                        </p>
+                        <hr className="w-[100%] opacity-25" />
+                        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {user.memberOf && user.memberOf.length > 0 ? (
+                                user.memberOf.map((club) => (
+                                    <div 
+                                        key={Math.random()*400} 
+                                        className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            {club.clubLogo && (
+                                                <img 
+                                                    src={club.clubLogo} 
+                                                    alt={club.name} 
+                                                    className="w-10 h-10 rounded-full"
+                                                />
+                                            )}
+                                            <div>
+                                                <h3 className="font-semibold">{club}</h3>
+                                                <p className="text-sm text-gray-400">{club}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-gray-400">You haven't joined any clubs yet.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-white bg-black to-black shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-xl py-6">
+                    <div className="ml-6 p-3">
+                        <p className="text-xl flex items-center gap-3 text-white font-bold">
+                            Clubs Created
+                        </p>
+                        <hr className="w-[100%] opacity-25" />
+                        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {user.ownerOf && user.ownerOf.length > 0 ? (
+                                user.ownerOf.map((club: any) => (
+                                    <div 
+                                        key={club.id} 
+                                        className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            {club.clubLogo && (
+                                                <img 
+                                                    src={club.clubLogo} 
+                                                    alt={club} 
+                                                    className="w-10 h-10 rounded-full"
+                                                />
+                                            )}
+                                            <div>
+                                                <h3 className="font-semibold">{club}</h3>
+                                                <p className="text-sm text-gray-400">{club}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-gray-400">You haven't created any clubs yet.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
