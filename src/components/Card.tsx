@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaCalendarDays, FaUsers, FaChevronDown } from 'react-icons/fa6'
+import axios from 'axios'
 
 function Card({
   Name,
@@ -10,18 +11,20 @@ function Card({
   College,
   members,
   type,
-  des
+  des,
+  owner
 }: {
   Name: string,
   Organiser: string,
   College: string,
   members: number,
   type: string,
-  des: string
+  des: string,
+  owner: string
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [randomImage, setRandomImage] = useState('/c1.png'); // Default image
-
+  const [randomImage, setRandomImage] = useState('/c1.jpeg'); // Default image
+  const [membersCount, setMembersCount] = useState(0);
   // Array of image paths
   const imagePaths = ['/c1.jpeg', '/c2.jpeg', '/c3.jpeg', '/c4.jpeg', '/c5.jpeg', '/c6.jpeg', '/c7.jpeg'];
   
@@ -31,7 +34,20 @@ function Card({
     setRandomImage(imagePaths[randomIndex]);
   }, []);
 
-  const desc: string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur corporis velit necessitatibus, repellat laudantium Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur officia eveniet ut minus nostrum quo accusamus. Placeat voluptates corrupti inventore quod ea facilis molestiae quis ut magnam, nesciunt amet similique perferendis aut cupiditate sequi consectetur laborum dignissimos qui exercitationem cum?"
+  // Set members count
+  const fetchMembersCount = async () => {
+    try {
+      const memberRes=await axios.post(`/api/getMemberCount`, {name: Name});
+      setMembersCount(memberRes.data.value);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchMembersCount();
+  }, []);
+
 
   return (
     <div className='relative group w-full sm:w-[90%] md:w-[80%] lg:w-[30vw] min-w-[280px]'>
@@ -58,7 +74,7 @@ function Card({
               <div className='flex justify-between items-center flex-wrap gap-2'>
                 <div className='flex items-center gap-2 text-gray-300'>
                   <FaUsers className="text-white" />
-                  <span>{members} members</span>
+                  <span>{membersCount} members</span>
                 </div>
                 <div className='px-3 py-1 bg-[#EC41F2]/20 border border-[#EC41F2]/30 rounded-full text-sm font-medium'>
                   {type}
@@ -70,7 +86,7 @@ function Card({
                   {Name}
                 </h2>
                 <Link 
-                  href={`/dashboard/${Organiser}?college=${College}&members=${members}`}
+                  href={`/dashboard/${Organiser}?college=${College}&members=${members}&owner=${owner}&name=${Name}`}
                   className='text-white hover:text-[#f76df7] transition-colors font-medium'
                 >
                   {Organiser}
@@ -81,14 +97,14 @@ function Card({
           </div>
 
           <div className='text-gray-300 text-sm leading-relaxed'>
-            {des}...
+            {des.split(' ').slice(0, 20).join(' ')}...
           </div>
 
           <div className='h-px bg-gradient-to-r from-transparent via-[#EC41F2]/50 to-transparent'></div>
 
           <div className='flex justify-between items-center pt-2'>
             <Link 
-              href={`/dashboard/${Organiser}?college=${College}&members=${members}`}
+              href={`/dashboard/${Organiser}?college=${College}&members=${members}&owner=${owner}&name=${Name}`}
               className='px-4 py-2 bg-[#EC41F2]/20 hover:bg-[#EC41F2]/30 border border-[#EC41F2]/30 rounded-xl transition-colors duration-300 text-sm font-medium'
             >
               Dashboard
@@ -151,7 +167,7 @@ function Card({
           <div className='p-4 space-y-3 bg-black/20'>
             {/* Description */}
             <p className='text-sm text-gray-300'>
-              {desc.split(' ').slice(0, 15).join(' ')}...
+              {des.split(' ').slice(0, 9).join(' ')}...
             </p>
 
             {/* Organizer */}

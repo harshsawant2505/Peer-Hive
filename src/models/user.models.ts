@@ -2,6 +2,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+
+
 const userSchema = new Schema(
   {
     name: {
@@ -23,7 +25,9 @@ const userSchema = new Schema(
     college:{
       type: String,
 
-    }
+    },
+    ownerOf:[String],
+    memberOf:[String],
   },
 
 );
