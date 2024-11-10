@@ -24,8 +24,11 @@ import {
   Menu,
 } from "lucide-react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import IssueDrawer from "@/components/IssueDrawer";
 
 function Page({ params, searchParams }: any) {
+  const router = useRouter()
   const unwrappedParams = React.use(params);
   const unwrappedSearch = React.use(searchParams);
   const organiser = decodeURIComponent(unwrappedParams.slug);
@@ -140,7 +143,14 @@ function Page({ params, searchParams }: any) {
           {["Announcements", "Management", "Discussion"].map((item) => (
             <button
               key={item}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
+              className="w-full text-left  px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
+              onClick={()=>{
+                console.log(item)
+                if(item=='Discussion'){
+                  console.log('discussion')
+                  router.push(`/discussion?id=${organiser}`)
+                }
+              }}
             >
               {item}
             </button>
@@ -161,11 +171,13 @@ function Page({ params, searchParams }: any) {
             "Collect Issues",
             "Schedule Meeting",
             "Schedule Announcement",
-          ].map((item) => (
+          ].map((item) =>item == "Collect Issues"?<IssueDrawer organiser = {organiser} key={item}/>: (
+
             <button
               key={item}
               className="w-full text-left px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
             >
+              
               {item}
             </button>
           ))}
@@ -184,6 +196,13 @@ function Page({ params, searchParams }: any) {
             <button
               key={item}
               className="w-full text-left px-4 py-2 text-gray-300 hover:bg-blue-500/20 rounded-lg transition"
+              onClick={()=>{
+                console.log(item)
+                if(item=='Discussion'){
+                  console.log('discussion')
+                  router.push(`/discussion?id=${organiser}`)
+                }
+              }}
             >
               {item}
             </button>
