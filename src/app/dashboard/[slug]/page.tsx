@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import BudgetInput from "@/components/BudgetInput";
 import {toast, Toaster } from "react-hot-toast";
 import TodoSection from "@/components/TodoSection";
+import EditableMemberList from '@/components/EditableMemberList';
 import {
   Sheet,
   SheetContent,
@@ -133,7 +134,17 @@ function Page({ params, searchParams }: any) {
     { title: "Meeting Tomorrow", description: "Plan upcoming events" },
   ];
 
-  const SidebarPresident = () => (
+  const initialMembers = [
+    { id: 1, role: 'President', name: username },
+    { id: 2, role: 'Vice President', name: 'Chinmay' },
+    { id: 3, role: 'Chairman', name: 'Harsh Sawant' },
+    { id: 4, role: 'Treasurer', name: 'Harsh Sawant' },
+    { id: 5, role: 'Web Dev Lead', name: 'Harsh Sawant' },
+    { id: 6, role: 'Cloud Lead', name: 'Chinmay' },
+    { id: 7, role: 'ML Lead', name: 'Kedron' },
+  ];
+
+    const SidebarPresident = () => (
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
@@ -306,6 +317,9 @@ function Page({ params, searchParams }: any) {
               <TodoSection name={name}/>
 
               {/* Team Members */}
+              {user?.email === owner ? (
+  <EditableMemberList initialMembers={initialMembers} />
+) : (
               <Card className="bg-slate-800/50 border-none text-white">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -333,7 +347,7 @@ function Page({ params, searchParams }: any) {
                     ))}
                   </div>
                 </CardContent>
-              </Card>
+              </Card>)}
             </div>
 
             {/* Right Sidebar */}
