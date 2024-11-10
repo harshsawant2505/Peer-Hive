@@ -17,6 +17,15 @@ const expenseSchema = new mongoose.Schema({
   }
 });
 
+const todoSchema=new mongoose.Schema({
+  title:{
+    type: String,
+    
+  },
+  desc:{
+    type: String,
+  }
+})
 
 const entrySchema = new Schema(
   {
@@ -48,6 +57,7 @@ const entrySchema = new Schema(
       default:0
     },
     expenses: [expenseSchema],
+    todos:[todoSchema],
   },
 
 );

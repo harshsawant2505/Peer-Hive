@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import BudgetInput from "@/components/BudgetInput";
 import {toast, Toaster } from "react-hot-toast";
+import TodoSection from "@/components/TodoSection";
 import {
   Sheet,
   SheetContent,
@@ -283,28 +284,7 @@ function Page({ params, searchParams }: any) {
             {/* Main Content */}
             <div className="lg:col-span-6 space-y-4 lg:space-y-6">
               {/* Todo Section */}
-              <Card className="bg-slate-800/50 border-none text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CheckSquare size={20} /> To-Do List
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 gap-4">
-                    {todos.map((todo, index) => (
-                      <div
-                        key={index}
-                        className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30"
-                      >
-                        <h3 className="font-semibold">{todo.title}</h3>
-                        <div className="text-gray-300 text-sm">
-                          {todo.description}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <TodoSection name={name}/>
 
               {/* Team Members */}
               <Card className="bg-slate-800/50 border-none text-white">
